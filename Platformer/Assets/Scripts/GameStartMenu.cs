@@ -6,24 +6,14 @@ using UnityEngine.Events;
 public class GameStartMenu : MonoBehaviour
 {
 
-    [SerializeField] GameObject startMenu;
-    [SerializeField] GameObject settingsMenu;
-
-    [SerializeField] Button playButton;
-    [SerializeField] Button optionsButton;
-    [SerializeField] Button quitGameButton;
-    [SerializeField] Button backButton;
+    private MenuStateHandler menuStateHandler;
 
     void Awake()
     {
 
-        playButton = GetComponent<Button>();
-        optionsButton = GetComponent<Button>();
-        quitGameButton = GetComponent<Button>();
-        backButton = GetComponent<Button>();
+        menuStateHandler = GetComponent<MenuStateHandler>();
 
-        startMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        menuStateHandler.hrefMenu("Main Menu");
     }
 
     public void playGame()
@@ -32,25 +22,27 @@ public class GameStartMenu : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
-    public void settings()
-    {
-
-        startMenu.SetActive(false);
-
-        settingsMenu.SetActive(true);
-    }
-
-    public void back()
-    {
-
-        startMenu.SetActive(true);
-
-        settingsMenu.SetActive(false);
-    }
-
-    public void quit()
+    public void quitGame()
     {
 
         Application.Quit();
+    }
+
+    public void optionsMenu()
+    {
+
+        menuStateHandler.hrefMenu("Options Menu");
+    }
+
+    public void registerMenu()
+    {
+
+        menuStateHandler.hrefMenu("Register Menu");
+    }
+
+    public void loginMenu()
+    {
+
+        menuStateHandler.hrefMenu("Login Menu");
     }
 }
