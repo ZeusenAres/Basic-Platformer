@@ -8,14 +8,18 @@ public class Login : MonoBehaviour
 
     [SerializeField] Button backButton;
 
-    void Start()
-    {
-        
-    }
+    private MenuStateHandler menuStateHandler;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
         
+        backButton = GetComponent<Button>();
+        menuStateHandler = GetComponent<MenuStateHandler>();
+    }
+    
+    public void back()
+    {
+
+        menuStateHandler.backButton();
     }
 }

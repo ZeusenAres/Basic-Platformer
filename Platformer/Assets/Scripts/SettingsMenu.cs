@@ -8,14 +8,18 @@ public class SettingsMenu : MonoBehaviour
 
     [SerializeField] Button backButton;
 
-    void Start()
+    private MenuStateHandler menuStateHandler;
+
+    void Awake()
     {
-        
+
+        backButton = GetComponent<Button>();
+        menuStateHandler = GetComponent<MenuStateHandler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void back()
     {
-        
+
+        menuStateHandler.backButton();
     }
 }

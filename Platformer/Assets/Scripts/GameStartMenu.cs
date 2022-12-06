@@ -8,41 +8,14 @@ public class GameStartMenu : MonoBehaviour
 
     private MenuStateHandler menuStateHandler;
 
+    private StartMenu startMenu;
+
     void Awake()
     {
 
         menuStateHandler = GetComponent<MenuStateHandler>();
+        startMenu = GetComponent<StartMenu>();
 
         menuStateHandler.hrefMenu("Main Menu");
-    }
-
-    public void playGame()
-    {
-
-        SceneManager.LoadScene("Level 1");
-    }
-
-    public void quitGame()
-    {
-
-        Application.Quit();
-    }
-
-    public void optionsMenu()
-    {
-
-        menuStateHandler.hrefMenu("Options Menu");
-    }
-
-    public void registerMenu()
-    {
-
-        menuStateHandler.hrefMenu("Register Menu");
-    }
-
-    public void loginMenu()
-    {
-
-        menuStateHandler.hrefMenu("Login Menu");
     }
 }

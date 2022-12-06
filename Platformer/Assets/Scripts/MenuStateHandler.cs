@@ -27,4 +27,9 @@ public class MenuStateHandler : MonoBehaviour
             }
         }
     }
+
+    public void backButton()
+    {
+        hrefMenu("Main Menu");
+    }
 }
