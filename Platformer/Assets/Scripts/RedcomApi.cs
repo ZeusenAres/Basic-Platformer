@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,16 +6,13 @@ public class RedcomApi : MonoBehaviour
 {
 
     private API api;
-    private ErrorMessageUI errorMessageUI;
-    private string errorMessage;
+    private ErrorMessageUI errorMessage;
 
     void Awake()
     {
         
         api = GetComponent<API>();
-        errorMessageUI = GetComponent<ErrorMessageUI>();
-
-        errorMessage = errorMessageUI.getErrorMessageUI();
+        errorMessage = GetComponent<ErrorMessageUI>();
     }
 
     public IEnumerator registerUser(string username, string password, string email)
@@ -26,18 +22,26 @@ public class RedcomApi : MonoBehaviour
         form.AddField("password", password);
         form.AddField("email", email);
 
-        using (UnityWebRequest www = UnityWebRequest.Post(api.baseUrl + api.registerEndpoint, form))
+        if(api == null)
         {
-            yield return www.SendWebRequest();
 
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                errorMessage = www.error;
-            }
-            else
-            {
-                Debug.Log("Form upload complete!");
-            }
+            errorMessage.setErrorMessage("URL unreachable");
+
+            yield return errorMessage;
+        }
+
+        string uri = api.getBaseUrl() + "" + api.getRegisterEndpoint();
+
+        using UnityWebRequest www = UnityWebRequest.Post(uri, form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            errorMessage.setErrorMessage(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
         }
     }
 }

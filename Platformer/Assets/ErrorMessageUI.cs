@@ -6,16 +6,9 @@ public class ErrorMessageUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI errerMessage;
 
-    void Start()
+    public string setErrorMessage(string message)
     {
-        
-        errerMessage = GetComponent<TextMeshProUGUI>();
-    }
 
-    // Update is called once per frame
-    public string getErrorMessageUI()
-    {
-        
-        return errerMessage.text;
+        return errerMessage.text = message;
     }
 }

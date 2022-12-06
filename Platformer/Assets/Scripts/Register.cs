@@ -4,16 +4,15 @@ using TMPro;
 
 public class Register : MonoBehaviour
 {
-    [SerializeField] TMP_InputField username;
-    [SerializeField] TMP_InputField password;
-    [SerializeField] TMP_InputField repeatedPassword;
-    [SerializeField] TMP_InputField email;
+    [SerializeField] InputField username;
+    [SerializeField] InputField password;
+    [SerializeField] InputField repeatedPassword;
+    [SerializeField] InputField email;
     [SerializeField] Button register;
     [SerializeField] Button backButton;
 
     private RedcomApi redcomApi;
     private ErrorMessageUI errorMessageUI;
-    private string error;
 
     private MenuStateHandler menuStateHandler;
 
@@ -24,23 +23,25 @@ public class Register : MonoBehaviour
         menuStateHandler = GetComponent<MenuStateHandler>();
         redcomApi = GetComponent<RedcomApi>();
         errorMessageUI = GetComponent<ErrorMessageUI>();
-
-        error = errorMessageUI.getErrorMessageUI();
     }
 
     public void registerUser()
     {
 
-        if (!password.text.Equals(repeatedPassword))
+        string password = this.password.text;
+
+        string repeatedPassword = this.repeatedPassword.text;
+
+        if (!password.Equals(repeatedPassword))
         {
 
-            error = "Passwords must match";
+            errorMessageUI.setErrorMessage("Passwords must match");
         }
 
-        if(password.text.Equals(repeatedPassword))
+        if(password.Equals(repeatedPassword))
         {
 
-            StartCoroutine(redcomApi.registerUser(username.text, password.text, email.text));
+            StartCoroutine(redcomApi.registerUser(username.text, password, email.text));
         }
     }
 
