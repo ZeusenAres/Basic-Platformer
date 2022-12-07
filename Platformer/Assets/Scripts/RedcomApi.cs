@@ -1,43 +1,55 @@
+using System;
 using System.Collections;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class RedcomApi : MonoBehaviour
 {
 
-    private API api;
     private ErrorMessageUI errorMessage;
+
+    private UserDTO userDto;
 
     void Awake()
     {
-        
-        api = GetComponent<API>();
+
         errorMessage = GetComponent<ErrorMessageUI>();
+        userDto = GetComponent<UserDTO>();
     }
 
-    public IEnumerator registerUser(string username, string password, string email)
+    public IEnumerator registerUser(string usernameInput, string passwordInput, string emailInput)
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
-        form.AddField("email", email);
 
-        if(api == null)
-        {
+        userDto.username = usernameInput;
+        userDto.password = passwordInput;
+        userDto.email = emailInput;
 
-            errorMessage.setErrorMessage("URL unreachable");
+        string backslash = @"\";
 
-            yield return errorMessage;
-        }
+        var postBody = JsonUtility.ToJson(userDto, true).Replace(backslash, "");
 
-        string uri = api.getBaseUrl() + "" + api.getRegisterEndpoint();
+        string doubleQuote = "\u0022";
 
-        using UnityWebRequest www = UnityWebRequest.Post(uri, form);
+        doubleQuote.Substring(0, 1);
+
+        postBody = postBody.Replace("\"", doubleQuote);
+
+        postBody = postBody.Replace(":", ": ");
+
+        string uri = API.getBaseUrl() + API.getRegisterEndpoint();
+
+        using UnityWebRequest www = UnityWebRequest.Post(uri, postBody);
+
+        www.SetRequestHeader("Content-Type", "application/json");
+        www.SetRequestHeader("Accept", "application/json");
+
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            errorMessage.setErrorMessage(www.error);
+            errorMessage.setErrorMessage(www.downloadHandler.text);
         }
         else
         {
