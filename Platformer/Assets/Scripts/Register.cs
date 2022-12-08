@@ -12,7 +12,7 @@ public class Register : MonoBehaviour
     [SerializeField] Button backButton;
 
     private RedcomApi redcomApi;
-    private ErrorMessageUI errorMessageUI;
+    private UIMessage uiMessage;
 
     private MenuStateHandler menuStateHandler;
 
@@ -22,7 +22,7 @@ public class Register : MonoBehaviour
         backButton = GetComponent<Button>();
         menuStateHandler = GetComponent<MenuStateHandler>();
         redcomApi = GetComponent<RedcomApi>();
-        errorMessageUI = GetComponent<ErrorMessageUI>();
+        uiMessage = GetComponent<UIMessage>();
     }
 
     public void registerUser()
@@ -35,7 +35,7 @@ public class Register : MonoBehaviour
         if (!password.Equals(repeatedPassword))
         {
 
-            errorMessageUI.setErrorMessage("Passwords must match");
+            uiMessage.setErrorMessage("Passwords must match");
         }
 
         if(password.Equals(repeatedPassword))

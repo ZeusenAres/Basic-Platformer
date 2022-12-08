@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq.Expressions;
+using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,15 +9,18 @@ using UnityEngine.Networking;
 public class RedcomApi : MonoBehaviour
 {
 
-    private ErrorMessageUI errorMessage;
+    private UIMessage uiMessage;
 
     private UserDTO userDto;
+
+    private MenuStateHandler menuStateHandler;
 
     void Awake()
     {
 
-        errorMessage = GetComponent<ErrorMessageUI>();
+        uiMessage = GetComponent<UIMessage>();
         userDto = GetComponent<UserDTO>();
+        menuStateHandler = GetComponent<MenuStateHandler>();
     }
 
     public IEnumerator registerUser(string usernameInput, string passwordInput, string emailInput)
@@ -26,34 +30,36 @@ public class RedcomApi : MonoBehaviour
         userDto.password = passwordInput;
         userDto.email = emailInput;
 
-        string backslash = @"\";
-
-        var postBody = JsonUtility.ToJson(userDto, true).Replace(backslash, "");
-
-        string doubleQuote = "\u0022";
-
-        doubleQuote.Substring(0, 1);
-
-        postBody = postBody.Replace("\"", doubleQuote);
-
-        postBody = postBody.Replace(":", ": ");
+        var postBody = JsonUtility.ToJson(userDto, true);
 
         string uri = API.getBaseUrl() + API.getRegisterEndpoint();
 
-        using UnityWebRequest www = UnityWebRequest.Post(uri, postBody);
+        using UnityWebRequest www = new UnityWebRequest(uri, "POST");
+
+        byte[] rawPostData = Encoding.UTF8.GetBytes(postBody);
+
+        www.uploadHandler = new UploadHandlerRaw(rawPostData);
+
+        www.downloadHandler = new DownloadHandlerBuffer();
 
         www.SetRequestHeader("Content-Type", "application/json");
         www.SetRequestHeader("Accept", "application/json");
 
         yield return www.SendWebRequest();
-
+        if(www.result == UnityWebRequest.Result.InProgress)
+        {
+            StartCoroutine(registerUser(usernameInput, passwordInput, emailInput));
+        }
         if (www.result != UnityWebRequest.Result.Success)
         {
-            errorMessage.setErrorMessage(www.downloadHandler.text);
+            uiMessage.setErrorMessage(www.error);
         }
         else
         {
-            Debug.Log(www.downloadHandler.text);
+
+            menuStateHandler.hrefMenu("Main Menu");
+
+            uiMessage.setErrorMessage("");
         }
     }
 }
