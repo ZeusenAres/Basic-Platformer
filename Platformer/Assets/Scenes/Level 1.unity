@@ -270,7 +270,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 952010795}
   m_Follow: {fileID: 952010795}
   m_Lens:
     FieldOfView: 60
@@ -804,7 +804,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 919b8e34c66fba94f8f10d7778930832, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a586152ee3b0494a90ae05cec1484c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -848,7 +848,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: c7ae1b59d83df4044be9a1dcc3dac515, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &1120584897
 GameObject:
