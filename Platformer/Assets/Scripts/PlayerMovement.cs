@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Animator anim;
     [SerializeField] SpriteRenderer sprite;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if(collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;

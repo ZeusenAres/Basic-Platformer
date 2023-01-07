@@ -10,9 +10,7 @@ public class RedcomApi : MonoBehaviour
 {
 
     private UIMessage uiMessage;
-
     private UserDTO userDto;
-
     private MenuStateHandler menuStateHandler;
 
     void Awake()
@@ -48,10 +46,13 @@ public class RedcomApi : MonoBehaviour
         yield return www.SendWebRequest();
         if(www.result == UnityWebRequest.Result.InProgress)
         {
+
             StartCoroutine(registerUser(usernameInput, passwordInput, emailInput));
         }
+
         if (www.result != UnityWebRequest.Result.Success)
         {
+
             uiMessage.setErrorMessage(www.error);
         }
         else

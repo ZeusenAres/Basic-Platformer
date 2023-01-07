@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
-  - Coin
+  - Regular Coin
+  - Special Coin
   layers:
   - Default
   - TransparentFX

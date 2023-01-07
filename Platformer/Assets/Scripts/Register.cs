@@ -4,6 +4,7 @@ using TMPro;
 
 public class Register : MonoBehaviour
 {
+
     [SerializeField] InputField username;
     [SerializeField] InputField password;
     [SerializeField] InputField repeatedPassword;

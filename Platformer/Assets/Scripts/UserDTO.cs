@@ -8,8 +8,6 @@ public class UserDTO : MonoBehaviour
 {
 
     public string username;
-
     public string password;
-
     public string email;
 }

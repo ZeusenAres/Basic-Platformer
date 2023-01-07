@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
 
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] Button resumeButton;
+    [SerializeField] Button GameSettingsButton;
+    [SerializeField] Button startMenuButton;
 
     private bool isPaused;
 
@@ -13,8 +19,9 @@ public class PauseMenu : MonoBehaviour
     {
         
         pauseMenu.SetActive(false);
-    }
 
+        Time.timeScale = 1.0f;
+    }
 
     void Update()
     {
@@ -22,16 +29,15 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
 
-            if (isPaused)
+            switch(isPaused)
             {
+                case true:
+                    pauseGame();
+                    break;
 
-                pauseGame();
-            }
-
-            if (!isPaused)
-            {
-
-                resumeGame();
+                case false:
+                    resumeGame();
+                    break;
             }
         }        
     }
@@ -40,15 +46,31 @@ public class PauseMenu : MonoBehaviour
     {
 
         pauseMenu.SetActive(true);
+
         Time.timeScale = 0;
+
+        isPaused = false;
+    }
+
+    public void resumeGame()
+    {
+
+        pauseMenu.SetActive(false);
+
+        Time.timeScale = 1;
+
         isPaused = true;
     }
 
-    private void resumeGame()
+    public void gameSettings()
     {
-        
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-        isPaused = false;
+
+        Debug.Log("Coming Soon...");
+    }
+
+    public void startMenu()
+    {
+
+        SceneManager.LoadScene("Start");
     }
 }

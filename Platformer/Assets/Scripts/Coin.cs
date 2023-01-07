@@ -5,7 +5,29 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
-    private int coinValue = 1;
+    private readonly int coinAmount = 1;
+    private int coinValue;
+    private float weight;
+
+    private void Awake()
+    {
+
+        if (gameObject.CompareTag("Regular Coin"))
+        {
+
+            weight = 12.5f;
+
+            coinValue = 1;
+        }
+
+        if (gameObject.CompareTag("Special Coin"))
+        {
+
+            weight = 24.5f;
+
+            coinValue = 5;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -13,7 +35,9 @@ public class Coin : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
 
-            CoinScoreHandler.coinScoreHandler.updateScoreDisplay(coinValue);
+            CoinScoreHandler.coinScoreHandler.updateScoreDisplay(coinAmount, coinValue);
+
+            PlayerCoinCollectionHandler.playerCoinCollectionHandler.addWeight(weight);
 
             Destroy(gameObject);
         }

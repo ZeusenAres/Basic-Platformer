@@ -8,9 +8,9 @@ public class CoinScoreHandler : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI scoreUi;
-
+    [SerializeField] TextMeshProUGUI silverPlackUi;
     private int totalScore;
-
+    private int totalSilverPlackScore;
     public static CoinScoreHandler coinScoreHandler;
 
     void Awake()
@@ -19,10 +19,14 @@ public class CoinScoreHandler : MonoBehaviour
         coinScoreHandler = this;       
     }
 
-    public void updateScoreDisplay(int points)
+    public void updateScoreDisplay(int amount, int points)
     {
 
-        totalScore += points;
+        totalSilverPlackScore += points;
+
+        totalScore += amount;
+
+        silverPlackUi.text = totalSilverPlackScore.ToString();
 
         scoreUi.text = totalScore.ToString();
     }
