@@ -7,6 +7,9 @@ TagManager:
   - Platform
   - Regular Coin
   - Special Coin
+  - PlayerUi
+  - CollectibleDisplay
+  - Coin Icon
   layers:
   - Default
   - TransparentFX

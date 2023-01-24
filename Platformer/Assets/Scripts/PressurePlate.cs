@@ -7,7 +7,7 @@ public class PressurePlate : MonoBehaviour
 {
 
     [SerializeField] float targetWeight;
-    private PlayerCoinCollectionHandler playerCoinCollectionHandler;
+    private readonly PlayerCoinCollectionHandler playerCoinCollectionHandler;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

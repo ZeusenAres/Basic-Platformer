@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class PlayerCoinCollectionHandler : MonoBehaviour
 {
 
-    private float weightInCoins = 0;
+    private Int16 weightInCoins = 0;
     public static PlayerCoinCollectionHandler playerCoinCollectionHandler;
 
     private void Awake()
@@ -14,7 +15,7 @@ public class PlayerCoinCollectionHandler : MonoBehaviour
         playerCoinCollectionHandler = this;
     }
 
-    public void addWeight(float weight)
+    public void addWeight(Int16 weight)
     {
 
         weightInCoins += weight;
