@@ -12,8 +12,8 @@ public class CoinScoreHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI silverPlackUi;
     [SerializeField] Image collectibleIcon;
     [SerializeField] TextMeshProUGUI weightDisplay;
-    private int totalScore;
-    private int totalSilverPlackScore;
+    private Int16 totalScore;
+    private Int16 totalSilverPlackScore;
     public static CoinScoreHandler coinScoreHandler;
 
     void Awake()
@@ -22,7 +22,7 @@ public class CoinScoreHandler : MonoBehaviour
         coinScoreHandler = this;
     }
 
-    public void updateScoreDisplay(int amount, int points)
+    public void updateScoreDisplay(Int16 amount, Int16 points)
     {
 
         totalSilverPlackScore += points;
@@ -39,8 +39,6 @@ public class CoinScoreHandler : MonoBehaviour
 
         collectibleIcon.sprite = sprite;
 
-        weightDisplay.text = weight.ToString();
-
         collectibleIcon.color = color;
 
         Image icon = Instantiate(
@@ -50,5 +48,15 @@ public class CoinScoreHandler : MonoBehaviour
         );
 
         icon.transform.SetParent(GameObject.FindGameObjectWithTag("CollectibleDisplay").transform, false);
+
+        TextMeshProUGUI coinWeight = Instantiate(
+            weightDisplay,
+            new Vector3(0, 0, 0),
+            Quaternion.identity
+        );
+
+        weightDisplay.text = weight.ToString();
+
+        coinWeight.transform.SetParent(icon.transform, false);
     }
 }

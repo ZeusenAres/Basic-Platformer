@@ -7,30 +7,15 @@ public class Coin : MonoBehaviour
 {
 
     private SpriteRenderer coinSprite;
-    private readonly int coinAmount = 1;
-    private int coinValue;
+    private readonly Int16 coinAmount = 1;
+    private Int16 coinValue;
     private Int16 weight;
+    private new string tag;
 
     private void Awake()
     {
 
         coinSprite = GetComponent<SpriteRenderer>();
-
-        if (gameObject.CompareTag("Regular Coin"))
-        {
-
-            weight = 12;
-
-            coinValue = 1;
-        }
-
-        if (gameObject.CompareTag("Special Coin"))
-        {
-
-            weight = 24;
-
-            coinValue = 5;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,11 +24,40 @@ public class Coin : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
 
+            if (gameObject.CompareTag("Regular Coin"))
+            {
+
+                tag = "regular";
+            }
+
+            if (gameObject.CompareTag("Special Coin"))
+            {
+
+                tag = "special";
+            }
+
+            switch (tag)
+            {
+                case "regular":
+                    weight = 12;
+                    coinValue = 1;
+                    break;
+
+                case "special":
+                    weight = 24;
+                    coinValue = 5;
+                    break;
+            }
+
             CoinScoreHandler.coinScoreHandler.updateScoreDisplay(coinAmount, coinValue);
 
             CoinScoreHandler.coinScoreHandler.addToCoinDisplay(coinSprite.sprite, weight, coinSprite.color);
 
             PlayerCoinCollectionHandler.playerCoinCollectionHandler.addWeight(weight);
+
+            weight = 0;
+
+            coinValue = 0;
 
             Destroy(gameObject);
         }
