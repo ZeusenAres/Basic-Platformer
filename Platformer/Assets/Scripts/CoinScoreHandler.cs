@@ -15,6 +15,7 @@ public class CoinScoreHandler : MonoBehaviour
     private Int16 totalScore;
     private Int16 totalSilverPlackScore;
     private string weight;
+    private Color textColor;
     public static CoinScoreHandler coinScoreHandler;
 
     void Awake()
@@ -34,14 +35,36 @@ public class CoinScoreHandler : MonoBehaviour
         return this.weight = weight;
     }
 
+    public Color setTextColor(Color color)
+    {
+
+        return textColor = color;
+    }
+
     public void updateScoreDisplay(Int16 amount, Int16 points, Sprite sprite, string weight, Color color)
     {
 
+        if (Int16.Parse(weight) < 24)
+        {
+
+            Color newColor = this.setTextColor(Color.green);
+
+            weightDisplay.color = newColor;
+        }
+
+        if (Int16.Parse(weight) >= 24)
+        {
+
+            Color newColor = this.setTextColor(Color.red);
+
+            weightDisplay.color = newColor;
+        }
+
         totalSilverPlackScore += points;
 
-        totalScore += amount;
-
         silverPlackUi.text = totalSilverPlackScore.ToString();
+
+        totalScore += amount;
 
         scoreUi.text = totalScore.ToString();
 
@@ -66,7 +89,5 @@ public class CoinScoreHandler : MonoBehaviour
         weightDisplay.text = weight;
 
         coinWeight.transform.SetParent(icon.transform, false);
-
-        
     }
 }

@@ -817,10 +817,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectableDisplay
       objectReference: {fileID: 0}
-    - target: {fileID: 8961431134203561677, guid: 30a862bde447f4943b368adcab74edb9, type: 3}
-      propertyPath: m_TagString
-      value: CollectibleDisplay
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30a862bde447f4943b368adcab74edb9, type: 3}
 --- !u!1 &1527210116
