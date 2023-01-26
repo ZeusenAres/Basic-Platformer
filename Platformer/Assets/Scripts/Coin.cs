@@ -49,9 +49,9 @@ public class Coin : MonoBehaviour
                     break;
             }
 
-            CoinScoreHandler.coinScoreHandler.updateScoreDisplay(coinAmount, coinValue);
+            string setWeight = CoinScoreHandler.coinScoreHandler.setWeight(weight.ToString());
 
-            CoinScoreHandler.coinScoreHandler.addToCoinDisplay(coinSprite.sprite, weight, coinSprite.color);
+            CoinScoreHandler.coinScoreHandler.updateScoreDisplay(coinAmount, coinValue, coinSprite.sprite, setWeight, coinSprite.color);
 
             PlayerCoinCollectionHandler.playerCoinCollectionHandler.addWeight(weight);
 
