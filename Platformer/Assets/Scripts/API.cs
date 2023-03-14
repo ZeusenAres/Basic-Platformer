@@ -6,6 +6,7 @@ public class API : MonoBehaviour
     private API api;
     private static string baseUrl = "localhost:9085";
     private static string registerEndpoint = "/register";
+    private static string loginEndpoint = "/login";
 
     private void Awake()
     {
@@ -23,5 +24,11 @@ public class API : MonoBehaviour
     {
 
         return registerEndpoint;
+    }
+
+    public static string getLoginEndpoint()
+    {
+
+        return loginEndpoint;
     }
 }

@@ -58,6 +58,49 @@ public class RedcomApi : MonoBehaviour
         else
         {
 
+            menuStateHandler.hrefMenu("Login Menu");
+
+            uiMessage.setErrorMessage("");
+        }
+    }
+
+    public IEnumerator loginUser(string usernameInput, string passwordInput, string emailInput)
+    {
+
+        userDto.username = usernameInput;
+        userDto.password = passwordInput;
+        userDto.email = emailInput;
+
+        var postBody = JsonUtility.ToJson(userDto, true);
+
+        string uri = API.getBaseUrl() + API.getLoginEndpoint();
+
+        using UnityWebRequest www = new UnityWebRequest(uri, "POST");
+
+        byte[] rawPostData = Encoding.UTF8.GetBytes(postBody);
+
+        www.uploadHandler = new UploadHandlerRaw(rawPostData);
+
+        www.downloadHandler = new DownloadHandlerBuffer();
+
+        www.SetRequestHeader("Content-Type", "application/json");
+        www.SetRequestHeader("Accept", "application/json");
+
+        yield return www.SendWebRequest();
+        if (www.result == UnityWebRequest.Result.InProgress)
+        {
+
+            StartCoroutine(loginUser(usernameInput, passwordInput, emailInput));
+        }
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+
+            uiMessage.setErrorMessage(www.error);
+        }
+        else
+        {
+
             menuStateHandler.hrefMenu("Main Menu");
 
             uiMessage.setErrorMessage("");

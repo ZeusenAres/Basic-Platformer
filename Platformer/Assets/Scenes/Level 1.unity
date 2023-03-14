@@ -252,11 +252,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7225906675223721952, guid: 35b03116af8e71e418b26739cb38b279, type: 3}
   m_PrefabInstance: {fileID: 355601954}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &388693797 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 908396847560233306, guid: 7237eaaa604362f47961b6b1286682a9, type: 3}
-  m_PrefabInstance: {fileID: 908396846879545712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &467804284 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1110587974065089848, guid: 365eda23dc5f7864fa13c7cded664af3, type: 3}
@@ -974,14 +969,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 908396846879545714, guid: 7237eaaa604362f47961b6b1286682a9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6a6cc204d295f7c46a7289406c5bec3c, type: 2}
     - target: {fileID: 908396847560233303, guid: 7237eaaa604362f47961b6b1286682a9, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 908396847560233304, guid: 7237eaaa604362f47961b6b1286682a9, type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 388693797}
     - target: {fileID: 908396847560233307, guid: 7237eaaa604362f47961b6b1286682a9, type: 3}
       propertyPath: m_RootOrder
       value: 3
