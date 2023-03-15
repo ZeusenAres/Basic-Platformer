@@ -18,12 +18,11 @@ public class PlayerMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        horizontalMovement = Input.GetAxis("Horizontal");
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
+
+        float horizontalMovement = Input.GetAxis("Horizontal");
 
         rb2d.velocity = new Vector2 (horizontalMovement * speed, rb2d.velocity.y);
 
@@ -48,12 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
             sprite.flipX = false;
         }
-    }
-
-    void Update()
-    {
-
-        //if(anim.SetBool("isMoving", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
