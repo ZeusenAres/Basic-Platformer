@@ -10,6 +10,9 @@ TagManager:
   - PlayerUi
   - CollectibleDisplay
   - Coin Icon
+  - CoinIcon1
+  - AddSpeed
+  - AddJump
   layers:
   - Default
   - TransparentFX

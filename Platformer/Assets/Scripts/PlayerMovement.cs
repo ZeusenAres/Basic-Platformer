@@ -8,10 +8,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Animator anim;
     [SerializeField] SpriteRenderer sprite;
-    [SerializeField] float speed;
-    [SerializeField] float jumpForce;
+    private const float defaultSpeed = 10f, defaultJumpForce = 7.5f;
+    private float speed = defaultSpeed;
+    private float jumpForce = defaultJumpForce;
     private bool isGrounded;
-    private float horizontalMovement;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalMovement = Input.GetAxis("Horizontal");
 
-        rb2d.velocity = new Vector2 (horizontalMovement * speed, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
 
         if(isGrounded == true)
         {
@@ -47,6 +47,29 @@ public class PlayerMovement : MonoBehaviour
 
             sprite.flipX = false;
         }
+    }
+
+    public float setSpeed(float speed)
+    {
+
+        return this.speed = speed;
+    }
+
+    public float setJumpForce(float jumpForce)
+    {
+
+        return this.jumpForce = jumpForce;
+    }
+
+    public IEnumerator setPowerUpDuration(int seconds, GameObject gameObject)
+    {
+
+        yield return new WaitForSeconds(seconds);
+
+        
+        setSpeed(defaultSpeed);
+        setJumpForce(defaultJumpForce);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
