@@ -7,7 +7,14 @@ public class PressurePlate : MonoBehaviour
 {
 
     [SerializeField] float targetWeight;
-    private readonly PlayerCoinCollectionHandler playerCoinCollectionHandler;
+    [SerializeField] GameObject player;
+    private PlayerCoinCollectionHandler playerCoinCollectionHandler;
+
+    private void Awake()
+    {
+
+        playerCoinCollectionHandler = player.GetComponent<PlayerCoinCollectionHandler>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,7 +22,7 @@ public class PressurePlate : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
 
-            if (PlayerCoinCollectionHandler.playerCoinCollectionHandler.getWeight() == targetWeight)
+            if (playerCoinCollectionHandler.getWeight() == targetWeight)
             {
 
                 SceneManager.LoadScene("Start");

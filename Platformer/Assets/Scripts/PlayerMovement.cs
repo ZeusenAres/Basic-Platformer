@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] Rigidbody2D rb2d;
-    [SerializeField] Animator anim;
-    [SerializeField] SpriteRenderer sprite;
-    private const float defaultSpeed = 10f, defaultJumpForce = 7.5f;
-    private float speed = defaultSpeed;
-    private float jumpForce = defaultJumpForce;
+    [SerializeField] GameObject self;
+    private Rigidbody2D rb2d;
+    private Animator anim;
+    private SpriteRenderer sprite;
+    private const float defaultSpeed = 10f, defaultJumpForce = 6f;
+    private float speed = defaultSpeed, jumpForce = defaultJumpForce;
     private bool isGrounded;
 
-    void Start()
+    void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
+        rb2d = self.GetComponent<Rigidbody2D>();
+        anim = self.GetComponent<Animator>();
+        sprite = self.GetComponent<SpriteRenderer>();
     }
     void FixedUpdate()
     {
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(horizontalMovement > 0)
+        if (horizontalMovement > 0)
         {
 
             sprite.flipX = true;
@@ -47,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
             sprite.flipX = false;
         }
+
+        //Debug.Log(speed);
+        //Debug.Log(jumpForce);
     }
 
     public float setSpeed(float speed)
@@ -55,21 +58,22 @@ public class PlayerMovement : MonoBehaviour
         return this.speed = speed;
     }
 
+    public float getSpeed()
+    {
+
+        return speed;
+    }
+
     public float setJumpForce(float jumpForce)
     {
 
         return this.jumpForce = jumpForce;
     }
 
-    public IEnumerator setPowerUpDuration(int seconds, GameObject gameObject)
+    public float getJumpForce()
     {
 
-        yield return new WaitForSeconds(seconds);
-
-        
-        setSpeed(defaultSpeed);
-        setJumpForce(defaultJumpForce);
-        Destroy(gameObject);
+        return jumpForce;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

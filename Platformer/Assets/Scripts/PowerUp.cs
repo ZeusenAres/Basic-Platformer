@@ -6,12 +6,14 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] GameObject player;
     private PlayerMovement playerMovement;
+    private PlayerPowerUpHandler playerPowerUpHandler;
     [SerializeField] SpriteRenderer powerUpSprite;
     [SerializeField] int duration;
 
     private void Awake()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
+        playerPowerUpHandler = player.GetComponent<PlayerPowerUpHandler>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -21,16 +23,18 @@ public class PowerUp : MonoBehaviour
 
             if (gameObject.CompareTag("AddSpeed"))
             {
-                playerMovement.setSpeed(20f);
+
+                playerMovement.setSpeed(playerMovement.getSpeed() * 2);
             }
 
             if (gameObject.CompareTag("AddJump"))
             {
-                playerMovement.setJumpForce(15f);
+
+                playerMovement.setJumpForce(playerMovement.getJumpForce() * 2);
             }
             powerUpSprite.sprite = null;
             gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform, false);
-            StartCoroutine(playerMovement.setPowerUpDuration(duration, gameObject));
+            StartCoroutine(playerPowerUpHandler.setPowerUpDuration(duration, gameObject));
         }
     }
 }
