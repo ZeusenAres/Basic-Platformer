@@ -13,7 +13,6 @@ public class PlayerCameraHandler : MonoBehaviour
     private float defaultJumpForce;
     private float defaultOrthographicSize;
 
-    // Start is called before the first frame update
     void Awake()
     {
 
@@ -23,7 +22,6 @@ public class PlayerCameraHandler : MonoBehaviour
         defaultOrthographicSize = playerCam.m_Lens.OrthographicSize;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -34,7 +32,7 @@ public class PlayerCameraHandler : MonoBehaviour
             {
 
                 playerCam.m_Lens.OrthographicSize += 0.05f;
-                StartCoroutine(inBetween(0.05f));
+                StartCoroutine(delay(0.05f));
             }
         }
         
@@ -44,14 +42,14 @@ public class PlayerCameraHandler : MonoBehaviour
             if (playerCam.m_Lens.OrthographicSize > defaultOrthographicSize)
             {
 
-                playerCam.m_Lens.OrthographicSize -= 0.05f;
-                StartCoroutine(inBetween(5f));
+                playerCam.m_Lens.OrthographicSize -= 0.005f;
+                StartCoroutine(delay(0.05f));
             }
         }
-        Debug.Log(defaultSpeed);
+        //Debug.Log(defaultSpeed);
     }
 
-    private IEnumerator inBetween(float seconds)
+    private IEnumerator delay(float seconds)
     {
 
         yield return new WaitForSeconds(seconds);

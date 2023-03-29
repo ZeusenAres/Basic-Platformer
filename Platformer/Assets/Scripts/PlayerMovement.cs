@@ -9,9 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator anim;
     private SpriteRenderer sprite;
-    private const float defaultSpeed = 10f, defaultJumpForce = 6f;
-    private float speed = defaultSpeed, jumpForce = defaultJumpForce;
-    private bool isGrounded;
+    private const float defaultSpeed = 10f, defaultJumpForce = 6f, defaultDashTime = 0.1f;
+    private float speed = defaultSpeed, jumpForce = defaultJumpForce, dashForce = 24f, dashTime = defaultDashTime, dashCooldown = 0.5f;
+    private bool isGrounded, isDashing = false, canDash = true;
 
     void Awake()
     {
@@ -24,9 +24,13 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalMovement = Input.GetAxis("Horizontal");
 
-        rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
+        if(isDashing == false)
+        {
 
-        if(isGrounded == true)
+            rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
+        }
+
+        if (isGrounded == true)
         {
 
             if(Input.GetKey(KeyCode.Space))
@@ -34,6 +38,17 @@ public class PlayerMovement : MonoBehaviour
 
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
             }
+        }
+
+        if(Input.GetKey(KeyCode.Tab) == true)
+        {
+
+            if (canDash == false)
+            {
+
+                return;
+            }
+            StartCoroutine(dash(sprite.flipX));
         }
 
         if (horizontalMovement > 0)
@@ -76,11 +91,29 @@ public class PlayerMovement : MonoBehaviour
         return jumpForce;
     }
 
+    private IEnumerator dash(bool flipX)
+    {
+
+        isDashing = true;
+        if(canDash == true)
+        {
+
+            canDash = false;
+            rb2d.velocity = flipX == true ? new Vector2(dashForce, rb2d.velocity.y) : new Vector2(-dashForce, rb2d.velocity.y);
+        }
+        yield return new WaitForSeconds(dashTime);
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+        Debug.Log("You can dash now");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
         if(collision.gameObject.CompareTag("Platform"))
         {
+
             isGrounded = true;
         }
     }
@@ -90,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Platform"))
         {
+
             isGrounded = false;
         }
     }
