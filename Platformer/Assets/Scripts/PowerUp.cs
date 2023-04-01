@@ -30,7 +30,7 @@ public class PowerUp : MonoBehaviour
             if (gameObject.CompareTag("AddJump"))
             {
 
-                playerMovement.setJumpForce(playerMovement.getJumpForce() * 2);
+                playerMovement.setJumpForce(playerMovement.getJumpForce() * 1.25f);
             }
             powerUpSprite.sprite = null;
             gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform, false);

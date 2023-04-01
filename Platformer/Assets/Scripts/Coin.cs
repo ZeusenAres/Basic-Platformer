@@ -55,6 +55,8 @@ public class Coin : MonoBehaviour
                     break;
             }
 
+            Destroy(gameObject);
+
             string setWeight = coinScoreHandler.setWeight(weight.ToString());
 
             coinScoreHandler.updateScoreDisplay(coinAmount, coinValue, coinSprite.sprite, setWeight, coinSprite.color);
@@ -64,8 +66,6 @@ public class Coin : MonoBehaviour
             weight = 0;
 
             coinValue = 0;
-
-            Destroy(gameObject);
         }
     }
 }
