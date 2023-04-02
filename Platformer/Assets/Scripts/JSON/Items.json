@@ -1,8 +1,14 @@
 ﻿{
-  "Regular Coin": [
+  "collectableCoins": [
     {
+      "tag": "Regular Coin",
       "weight": 12,
       "coinValue": 1
+    },
+    {
+      "tag": "Special Coin",
+      "weight": 24,
+      "coinValue": 5
     }
   ]
 }
