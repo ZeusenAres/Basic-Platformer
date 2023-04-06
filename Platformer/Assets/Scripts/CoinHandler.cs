@@ -9,17 +9,18 @@ public class CoinHandler : MonoBehaviour
 
     private SpriteRenderer coinSprite;
     private readonly Int16 coinAmount = 1;
-    private Int16 coinValue;
-    private Int16 weight;
-    private new string tag;
+    [SerializeField] GameObject mainHandler;
+    private ItemDeserializer coinDeserializer;
     [SerializeField] GameObject player;
     private PlayerCoinCollectionHandler playerCoinCollectionHandler;
     [SerializeField] GameObject playerUi;
     private CoinScoreHandler coinScoreHandler;
+    private bool isDestroyed;
 
     private void Awake()
     {
 
+        coinDeserializer = mainHandler.GetComponent<ItemDeserializer>();
         coinSprite = GetComponent<SpriteRenderer>();
         playerCoinCollectionHandler = player.GetComponent<PlayerCoinCollectionHandler>();
         coinScoreHandler = playerUi.GetComponent<CoinScoreHandler>();
@@ -27,46 +28,37 @@ public class CoinHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if(collision.gameObject.CompareTag("Player"))
+
+        if (collision.gameObject.CompareTag("Player"))
         {
 
-            if (gameObject.CompareTag("Regular Coin"))
+            if(isDestroyed == true)
             {
 
-                tag = "regular";
-            }
-
-            if (gameObject.CompareTag("Special Coin"))
-            {
-
-                tag = "special";
-            }
-
-            switch (tag)
-            {
-                case "regular":
-                    weight = 12;
-                    coinValue = 1;
-                    break;
-
-                case "special":
-                    weight = 24;
-                    coinValue = 5;
-                    break;
+                return;
             }
 
             Destroy(gameObject);
 
-            string setWeight = coinScoreHandler.setWeight(weight.ToString());
+            var coins = coinDeserializer.getCoins();
 
-            coinScoreHandler.updateScoreDisplay(coinAmount, coinValue, coinSprite.sprite, setWeight, coinSprite.color);
+            foreach (var coin in coinDeserializer.getCoins())
+            {
 
-            playerCoinCollectionHandler.addWeight(weight);
+                if (gameObject.CompareTag(coin.tag))
+                {
 
-            weight = 0;
+                    string setWeight = coinScoreHandler.setWeight(coin.weight.ToString());
 
-            coinValue = 0;
+                    coinScoreHandler.updateScoreDisplay(coinAmount, coin.coinValue, coinSprite.sprite, setWeight, coinSprite.color);
+
+                    playerCoinCollectionHandler.addWeight(coin.weight);
+
+                    isDestroyed = true;
+
+                    break;
+                }
+            }
         }
     }
 }

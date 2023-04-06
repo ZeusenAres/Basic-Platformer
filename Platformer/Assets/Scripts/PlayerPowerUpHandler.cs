@@ -17,7 +17,7 @@ public class PlayerPowerUpHandler : MonoBehaviour
         defaultJumpForce = playerMovement.getJumpForce();
     }
 
-    public IEnumerator setPowerUpDuration(int seconds, GameObject gameObject)
+    public IEnumerator setPowerUpDuration(float seconds, GameObject gameObject)
     {
 
         yield return new WaitForSeconds(seconds);

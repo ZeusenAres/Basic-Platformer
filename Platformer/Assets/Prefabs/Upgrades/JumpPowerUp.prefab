@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707865887512629221}
-  m_LocalRotation: {x: -0, y: -0, z: 0.9999973, w: -0.0023348883}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9999973, w: -0.002338794}
   m_LocalPosition: {x: -3.92, y: -1.448, z: 74.090034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -123,4 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  powerUpSprite: {fileID: 1707865887512629225}
+  mainHandler: {fileID: 0}
   duration: 5

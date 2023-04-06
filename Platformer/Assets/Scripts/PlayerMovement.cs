@@ -49,10 +49,10 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded == false && canDash == false)
         {
 
-            dashCooldown = 2f;
+            dashCooldown = 1.5f;
         }
 
-        if(Input.GetKey(KeyCode.Tab) == true || Input.GetKey(KeyCode.JoystickButton7) == true)
+        if(Input.GetKey(KeyCode.LeftShift) == true || Input.GetKey(KeyCode.JoystickButton7) == true)
         {
 
             if (canDash == false)

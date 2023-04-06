@@ -9,6 +9,27 @@
       "tag": "Special Coin",
       "weight": 24,
       "coinValue": 5
+    },
+    {
+      "tag": "Ultra Coin",
+      "weight": 36,
+      "coinValue": 100
+    }
+  ],
+  "powerUps": [
+    {
+      "tag": "AddSpeed",
+      "setter": "setSpeed",
+      "getter": "getSpeed",
+      "multiplier": 1.75,
+      "duration": 2.5
+    },
+    {
+      "tag": "AddJump",
+      "setter": "setJumpForce",
+      "getter": "getJumpForce",
+      "multiplier": 1.75,
+      "duration": 5.0
     }
   ]
 }

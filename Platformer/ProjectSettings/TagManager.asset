@@ -13,6 +13,7 @@ TagManager:
   - CoinIcon1
   - AddSpeed
   - AddJump
+  - Ultra Coin
   layers:
   - Default
   - TransparentFX
