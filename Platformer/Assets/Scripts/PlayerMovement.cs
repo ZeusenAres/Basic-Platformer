@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator anim;
     private SpriteRenderer sprite;
-    private const float defaultSpeed = 10f, defaultJumpForce = 6f;
-    private float speed = defaultSpeed, jumpForce = defaultJumpForce;
-    private bool isGrounded;
+    private const float defaultSpeed = 10f, defaultJumpForce = 20f, defaultDashTime = 0.1f, defaultDashCooldown = 0.15f, defaultDashForce = 24f;
+    private float speed = defaultSpeed, jumpForce = defaultJumpForce, dashForce = defaultDashForce, dashTime = defaultDashTime, dashCooldown;
+    private bool isGrounded, isDashing = false, canDash = true;
+    [SerializeField] List<GameObject> groundChecks = new List<GameObject>();
 
     void Awake()
     {
+
         rb2d = self.GetComponent<Rigidbody2D>();
         anim = self.GetComponent<Animator>();
         sprite = self.GetComponent<SpriteRenderer>();
@@ -22,18 +25,63 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
-        float horizontalMovement = Input.GetAxis("Horizontal");
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
 
-        rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
-
-        if(isGrounded == true)
+        if(isDashing == false)
         {
 
-            if(Input.GetKey(KeyCode.Space))
+            rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
+        }
+
+        /*if (rb2d.velocity.y < 0)
+        {
+            Debug.Log("falling");
+        }
+        if (rb2d.velocity.y > 0)
+        {
+            Debug.Log("rising");
+        }*/
+
+        if(horizontalMovement != 0 && isGrounded == true)
+        {
+
+            anim.SetBool("isRunning", true);
+        }
+
+        if (horizontalMovement == 0)
+        {
+
+            anim.SetBool("isRunning", false);
+        }
+
+        foreach (var groundCheck in groundChecks)
+        {
+            
+            isGrounded = groundCheck.GetComponent<PlayerGroundedHandler>().getGroundedStatus();
+        }
+
+        if (isGrounded == true)
+        {
+
+            dashCooldown = defaultDashCooldown;
+            jump();
+        }
+
+        if(isGrounded == false && canDash == false)
+        {
+
+            dashCooldown = 1.5f;
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift) == true || Input.GetKey(KeyCode.JoystickButton7) == true)
+        {
+
+            if (canDash == false)
             {
 
-                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                return;
             }
+            StartCoroutine(dash(sprite.flipX));
         }
 
         if (horizontalMovement > 0)
@@ -50,6 +98,32 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log(speed);
         //Debug.Log(jumpForce);
+    }
+
+    private void jump()
+    {
+
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton1))
+        {
+
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+        }
+    }
+
+    private IEnumerator dash(bool flipX)
+    {
+
+        isDashing = true;
+        if (canDash == true)
+        {
+
+            canDash = false;
+            rb2d.velocity = flipX == true ? new Vector2(dashForce, rb2d.velocity.y) : new Vector2(-dashForce, rb2d.velocity.y);
+        }
+        yield return new WaitForSeconds(dashTime);
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     public float setSpeed(float speed)
@@ -74,23 +148,5 @@ public class PlayerMovement : MonoBehaviour
     {
 
         return jumpForce;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if(collision.gameObject.CompareTag("Platform"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            isGrounded = false;
-        }
     }
 }

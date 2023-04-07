@@ -7,4 +7,3 @@ Cards mechanic:
 	-player can use vendors to upgrade/buy cards
 	-cards can be blank and gain abilities, once provided
 	-cards can be used on the enviroment and utilitized against enemies
-	-
