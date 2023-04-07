@@ -25,12 +25,33 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
-        float horizontalMovement = Input.GetAxis("Horizontal");
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
 
         if(isDashing == false)
         {
 
             rb2d.velocity = new Vector2(horizontalMovement * speed, rb2d.velocity.y);
+        }
+
+        /*if (rb2d.velocity.y < 0)
+        {
+            Debug.Log("falling");
+        }
+        if (rb2d.velocity.y > 0)
+        {
+            Debug.Log("rising");
+        }*/
+
+        if(horizontalMovement != 0 && isGrounded == true)
+        {
+
+            anim.SetBool("isRunning", true);
+        }
+
+        if (horizontalMovement == 0)
+        {
+
+            anim.SetBool("isRunning", false);
         }
 
         foreach (var groundCheck in groundChecks)

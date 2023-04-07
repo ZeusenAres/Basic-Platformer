@@ -81,5 +81,7 @@ public class PowerUp : MonoBehaviour
                 break;
             }
         }
+
+        isActivated = false;
     }
 }

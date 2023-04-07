@@ -8,7 +8,7 @@ public class PlayerCameraHandler : MonoBehaviour
 
     [SerializeField] CinemachineVirtualCamera playerCam;
     [SerializeField] GameObject player;
-    private PlayerMovement playerMovemrnt;
+    private PlayerMovement playerMovement;
     private float defaultSpeed;
     private float defaultJumpForce;
     private float defaultOrthographicSize;
@@ -16,16 +16,16 @@ public class PlayerCameraHandler : MonoBehaviour
     void Awake()
     {
 
-        playerMovemrnt = player.GetComponent<PlayerMovement>();
-        defaultSpeed = playerMovemrnt.getSpeed();
-        defaultJumpForce = playerMovemrnt.getJumpForce();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        defaultSpeed = playerMovement.getSpeed();
+        defaultJumpForce = playerMovement.getJumpForce();
         defaultOrthographicSize = playerCam.m_Lens.OrthographicSize;
     }
 
     void Update()
     {
 
-        if(playerMovemrnt.getSpeed() > defaultSpeed || playerMovemrnt.getJumpForce() > defaultJumpForce)
+        if(playerMovement.getSpeed() > defaultSpeed || playerMovement.getJumpForce() > defaultJumpForce)
         {
 
             if(playerCam.m_Lens.OrthographicSize < 7f)
@@ -36,7 +36,7 @@ public class PlayerCameraHandler : MonoBehaviour
             }
         }
         
-        if(playerMovemrnt.getSpeed() == defaultSpeed || playerMovemrnt.getJumpForce() == defaultJumpForce)
+        if(playerMovement.getSpeed() == defaultSpeed || playerMovement.getJumpForce() == defaultJumpForce)
         {
 
             if (playerCam.m_Lens.OrthographicSize > defaultOrthographicSize)
