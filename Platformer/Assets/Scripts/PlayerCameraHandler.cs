@@ -11,42 +11,61 @@ public class PlayerCameraHandler : MonoBehaviour
     private PlayerMovement playerMovement;
     private float defaultSpeed;
     private float defaultJumpForce;
-    private float defaultOrthographicSize;
+    private bool isPoweredUp = false;
 
-    void Awake()
+    private void Start()
     {
 
         playerMovement = player.GetComponent<PlayerMovement>();
-        defaultSpeed = playerMovement.getSpeed();
-        defaultJumpForce = playerMovement.getJumpForce();
-        defaultOrthographicSize = playerCam.m_Lens.OrthographicSize;
     }
 
     void Update()
     {
 
-        if(playerMovement.getSpeed() > defaultSpeed || playerMovement.getJumpForce() > defaultJumpForce)
+        if (defaultSpeed == 0)
         {
 
-            if(playerCam.m_Lens.OrthographicSize < 7f)
-            {
-
-                playerCam.m_Lens.OrthographicSize += 0.05f;
-                StartCoroutine(delay(0.05f));
-            }
+            defaultSpeed = playerMovement.getSpeed();
+            defaultJumpForce = playerMovement.getJumpForce();
         }
-        
-        if(playerMovement.getSpeed() == defaultSpeed || playerMovement.getJumpForce() == defaultJumpForce)
+
+        if (playerMovement.getSpeed() > defaultSpeed || playerMovement.getJumpForce() > defaultJumpForce)
         {
 
-            if (playerCam.m_Lens.OrthographicSize > defaultOrthographicSize)
-            {
-
-                playerCam.m_Lens.OrthographicSize -= 0.005f;
-                StartCoroutine(delay(0.05f));
-            }
+            expandLens();
         }
-        //Debug.Log(defaultSpeed);
+
+        if (playerMovement.getSpeed() == defaultSpeed || playerMovement.getJumpForce() == defaultJumpForce)
+        {
+
+            revertLens();
+        }
+    }
+
+    private float expandLens()
+    {
+
+        if(playerCam.m_Lens.OrthographicSize < 7f)
+        {
+
+            playerCam.m_Lens.OrthographicSize += 0.05f;
+            StartCoroutine(delay(0.05f));
+        }
+
+        return playerCam.m_Lens.OrthographicSize;
+    }
+
+    private float revertLens()
+    {
+
+        if (playerCam.m_Lens.OrthographicSize > 5f)
+        {
+
+            playerCam.m_Lens.OrthographicSize -= 0.005f;
+            StartCoroutine(delay(0.05f));
+        }
+
+        return playerCam.m_Lens.OrthographicSize;
     }
 
     private IEnumerator delay(float seconds)

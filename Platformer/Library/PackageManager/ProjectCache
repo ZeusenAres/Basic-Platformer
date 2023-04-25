@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638156299937896894
+      ticks: 638164956671916950
     m_Hash: 1999537169
   m_LockFileStatus:
     m_FilePath: C:/xampp/xampp/htdocs/GitHub/Basic Platformer/Platformer/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638156299938006837
+      ticks: 638164956672054658
     m_Hash: 2205830506
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -968,6 +968,7 @@ m_PackageAssets:
         - 2.0.0-preview.22
         - 2.0.0
         - 2.0.1
+        - 2.0.3
         - 2.1.0-preview.3
         - 2.1.0-preview.5
         - 2.1.0-preview.6
@@ -991,6 +992,7 @@ m_PackageAssets:
         - 2.0.0-preview.22
         - 2.0.0
         - 2.0.1
+        - 2.0.3
         - 2.1.0-preview.3
         - 2.1.0-preview.5
         - 2.1.0-preview.6
@@ -1613,6 +1615,7 @@ m_PackageAssets:
         - 1.3.1
         - 1.3.2
         - 1.3.3
+        - 1.3.4
         - 2.0.1-exp.1
         - 2.0.1-exp.2
         - 2.0.1-pre.12
@@ -1624,6 +1627,7 @@ m_PackageAssets:
         - 1.3.1
         - 1.3.2
         - 1.3.3
+        - 1.3.4
         - 2.0.1-exp.1
         - 2.0.1-exp.2
         - 2.0.1-pre.12
@@ -3927,6 +3931,7 @@ m_PackageAssets:
         - 1.7.0
         - 1.7.1
         - 1.8.1
+        - 1.8.2
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -3948,6 +3953,7 @@ m_PackageAssets:
         - 1.7.0
         - 1.7.1
         - 1.8.1
+        - 1.8.2
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest

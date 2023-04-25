@@ -7,20 +7,37 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] GameObject self;
+    [SerializeField] GameObject mainHandler;
+    private PlayerDeserializer playerInfo;
+    private List<Default> properties;
     private Rigidbody2D rb2d;
     private Animator anim;
     private SpriteRenderer sprite;
-    private const float defaultSpeed = 10f, defaultJumpForce = 20f, defaultDashTime = 0.1f, defaultDashCooldown = 0.15f, defaultDashForce = 24f;
-    private float speed = defaultSpeed, jumpForce = defaultJumpForce, dashForce = defaultDashForce, dashTime = defaultDashTime, dashCooldown;
-    private bool isGrounded, isDashing = false, canDash = true;
+    //private const float defaultSpeed = 10f, defaultJumpForce = 20f, defaultDashTime = 0.1f, defaultDashCooldown = 0.15f, defaultDashForce = 24f;
+    private float speed, jumpForce, dashForce, dashTime, dashCooldown;
+    private bool isGroundedLeft, isGroundedRight, isDashing = false, canDash = true;
     [SerializeField] List<GameObject> groundChecks = new List<GameObject>();
 
-    void Awake()
+    void Start()
     {
 
+        playerInfo = mainHandler.GetComponent<PlayerDeserializer>();
         rb2d = self.GetComponent<Rigidbody2D>();
         anim = self.GetComponent<Animator>();
         sprite = self.GetComponent<SpriteRenderer>();
+        properties = playerInfo.getDefaults();
+
+        foreach (var defaults in properties)
+        {
+
+            speed = defaults.speed;
+            jumpForce = defaults.jumpForce;
+            dashForce = defaults.dashForce;
+            dashTime = defaults.dashTime;
+            dashCooldown = defaults.dashCooldown;
+        }
+        //Position position = savedData.getSavedPositions();
+        //self.transform.SetPositionAndRotation(new Vector3(position.x, position.y, 0f), Quaternion.identity);
     }
     void FixedUpdate()
     {
@@ -42,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("rising");
         }*/
 
-        if(horizontalMovement != 0 && isGrounded == true)
+        if(horizontalMovement != 0 && isGroundedLeft == true || isGroundedRight == true)
         {
 
             anim.SetBool("isRunning", true);
@@ -54,20 +71,45 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isRunning", false);
         }
 
+        int count = 0;
+
         foreach (var groundCheck in groundChecks)
         {
-            
-            isGrounded = groundCheck.GetComponent<PlayerGroundedHandler>().getGroundedStatus();
+
+            if(count == 0)
+            {
+
+                isGroundedLeft = groundCheck.GetComponent<PlayerGroundedHandler>().getGroundedStatus();
+            }
+
+            if (count == 1)
+            {
+
+                isGroundedRight = groundCheck.GetComponent<PlayerGroundedHandler>().getGroundedStatus();
+            }
+
+            if (count >= 1)
+            {
+
+                count = 0;
+                break;
+            }
+
+            count++;
         }
 
-        if (isGrounded == true)
+        if (isGroundedLeft == true || isGroundedRight == true)
         {
 
-            dashCooldown = defaultDashCooldown;
+            foreach (var defaultValue in properties)
+            {
+
+                dashCooldown = defaultValue.dashCooldown;
+            }
             jump();
         }
 
-        if(isGrounded == false && canDash == false)
+        if(isGroundedLeft == false || isGroundedRight == false && canDash == false)
         {
 
             dashCooldown = 1.5f;

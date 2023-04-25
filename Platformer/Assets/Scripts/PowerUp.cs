@@ -72,7 +72,7 @@ public class PowerUp : MonoBehaviour
                 if (gameObject.CompareTag(powerUp.tag))
                 {
 
-                    Debug.Log(setterInvoke(powerUp, getterInvoke(powerUp)));
+                    setterInvoke(powerUp, getterInvoke(powerUp));
                 }
 
                 powerUpSprite.sprite = null;

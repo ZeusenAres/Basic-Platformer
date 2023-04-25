@@ -16,6 +16,12 @@ public class PressurePlate : MonoBehaviour
         playerCoinCollectionHandler = player.GetComponent<PlayerCoinCollectionHandler>();
     }
 
+    private void saveGame()
+    {
+        
+        
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 

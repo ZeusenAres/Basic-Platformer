@@ -5,16 +5,21 @@ using UnityEngine;
 public class PlayerPowerUpHandler : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] GameObject mainHandler;
+    private List<Default> defaultProperties;
     private PlayerMovement playerMovement;
     private float defaultSpeed;
     private float defaultJumpForce;
 
     private void Awake()
     {
-
+        defaultProperties = mainHandler.GetComponent<PlayerDeserializer>().getDefaults();
         playerMovement = player.GetComponent<PlayerMovement>();
-        defaultSpeed = playerMovement.getSpeed();
-        defaultJumpForce = playerMovement.getJumpForce();
+        foreach (var defaultProperty in defaultProperties)
+        {
+            defaultSpeed = defaultProperty.speed;
+            defaultJumpForce = defaultProperty.jumpForce;
+        }
     }
 
     public IEnumerator setPowerUpDuration(float seconds, GameObject gameObject)
