@@ -11,7 +11,6 @@ public class PlayerCameraHandler : MonoBehaviour
     private PlayerMovement playerMovement;
     private float defaultSpeed;
     private float defaultJumpForce;
-    private bool isPoweredUp = false;
 
     private void Start()
     {

@@ -8,7 +8,6 @@ public class Login : MonoBehaviour
 
     [SerializeField] InputField username;
     [SerializeField] InputField password;
-    [SerializeField] InputField email;
     [SerializeField] Button login;
     [SerializeField] Button backButton;
     private RedcomApi redcomApi;
@@ -27,7 +26,7 @@ public class Login : MonoBehaviour
     public void loginUser()
     {
 
-        StartCoroutine(redcomApi.registerUser(username.text, password.text, email.text));
+        StartCoroutine(redcomApi.loginUser(username.text, password.text));
     }
 
     public void back()
