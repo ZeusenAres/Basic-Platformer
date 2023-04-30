@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Linq.Expressions;
 using System.Text;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -56,7 +55,8 @@ public class RedcomApi : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
 
-            uiMessage.setErrorMessage(www.error);
+            BadRequest badRequest = JsonUtility.FromJson<BadRequest>(www.downloadHandler.text);
+            uiMessage.setErrorMessage(badRequest.message);
         }
         else
         {
@@ -98,7 +98,8 @@ public class RedcomApi : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
 
-            uiMessage.setErrorMessage(www.error);
+            BadRequest badRequest = JsonUtility.FromJson<BadRequest>(www.downloadHandler.text);
+            uiMessage.setErrorMessage(badRequest.message);
         }
         else
         {
@@ -118,4 +119,11 @@ public class User
     public string password;
     public string email;
     public short id;
+}
+
+public class BadRequest
+{
+    public string message;
+    public string httpStatus;
+    public string timestamp;
 }

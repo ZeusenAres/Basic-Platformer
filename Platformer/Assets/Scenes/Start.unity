@@ -1833,6 +1833,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432049196}
   m_CullTransparentMesh: 1
+--- !u!114 &438614014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5305631842917933808, guid: 5c05ad06dc513ef419f82d46a25db04e, type: 3}
+  m_PrefabInstance: {fileID: 563897314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &441250704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5305631842917933809, guid: 5c05ad06dc513ef419f82d46a25db04e, type: 3}
@@ -5327,7 +5338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   username: {fileID: 250669414}
-  password: {fileID: 0}
+  password: {fileID: 438614014}
   repeatedPassword: {fileID: 59486443}
   email: {fileID: 1949149776}
   register: {fileID: 853994017}
