@@ -60,6 +60,7 @@ public class PowerUp : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
+
             foreach (var powerUp in itemDeserializer.getPowerUps())
             {
 
