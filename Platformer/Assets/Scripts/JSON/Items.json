@@ -1,19 +1,12 @@
 ﻿{
-  "collectableCoins": [
+  "resourceItems": [
     {
-      "tag": "Regular Coin",
-      "weight": 12,
-      "coinValue": 1
+      "tag": "food",
+      "value": 25
     },
     {
-      "tag": "Special Coin",
-      "weight": 24,
-      "coinValue": 5
-    },
-    {
-      "tag": "Ultra Coin",
-      "weight": 36,
-      "coinValue": 100
+      "tag": "research",
+      "value": 25
     }
   ],
   "powerUps": [

@@ -14,9 +14,8 @@ public class ContentHandler : MonoBehaviour
     private string matchedProperty;
     void Start()
     {
+
         var targetClass = GameObject.Find("Main Camera").GetComponent("Camera");
-        //Debug.Log(type);
-        //var type = typeof(camera);
         Type type = targetClass.GetType();
         foreach (var property in type.GetProperties())
         {
