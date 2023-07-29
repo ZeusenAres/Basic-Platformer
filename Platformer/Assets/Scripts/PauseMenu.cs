@@ -30,14 +30,26 @@ public class PauseMenu : MonoBehaviour
             switch(isPaused)
             {
                 case true:
-                    pauseGame();
+                    isPaused = false;
                     break;
 
                 case false:
-                    resumeGame();
+                    isPaused = true;
                     break;
             }
-        }        
+
+            if (isPaused == true)
+            {
+
+                pauseGame();
+            }
+
+            if (isPaused == false)
+            {
+
+                resumeGame();
+            }
+        }
     }
 
     private void pauseGame()
@@ -46,8 +58,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
 
         Time.timeScale = 0;
-
-        isPaused = false;
     }
 
     public void resumeGame()
@@ -56,8 +66,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
 
         Time.timeScale = 1;
-
-        isPaused = true;
     }
 
     public void gameSettings()

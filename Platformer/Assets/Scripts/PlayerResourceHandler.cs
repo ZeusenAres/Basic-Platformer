@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
 public class PlayerResourceHandler : MonoBehaviour
@@ -8,8 +9,6 @@ public class PlayerResourceHandler : MonoBehaviour
 
     [SerializeField] Slider hungerBar;
     [SerializeField] Slider researchBar;
-    //private HungerBar hunger;
-    //private ResearchBar research;
     private PlayerInventory inventory;
     private bool isDestroyed;
     private Item item;
@@ -18,8 +17,8 @@ public class PlayerResourceHandler : MonoBehaviour
     {
 
         inventory = GetComponent<PlayerInventory>();
-        item = new Item();
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -33,21 +32,14 @@ public class PlayerResourceHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Food") || collision.gameObject.CompareTag("Research"))
         {
 
-            //hunger.feed(20f);
+            this.item = new Item();
             var item = collision.gameObject.GetComponent<ItemController>();
             this.item.sprite = item.getSprite();
             this.item.value = item.getValue();
             this.item.name = item.getName();
             inventory.addToInventory(this.item);
             isDestroyed = true;
-            Destroy(collision.gameObject);
         }
-    }
-
-    public bool IsDestroyed()
-    {
-
-        return isDestroyed;
     }
 }
 

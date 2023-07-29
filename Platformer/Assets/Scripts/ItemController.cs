@@ -6,16 +6,13 @@ public class ItemController : MonoBehaviour
 {
 
     [SerializeField] GameObject player;
-    private PlayerResourceHandler playerResourceHandler;
     [SerializeField] GameObject item;
     private SpriteRenderer spriteRenderer;
     private float value;
-    private Item itemClass;
 
     private void Awake()
     {
 
-        playerResourceHandler = player.GetComponent<PlayerResourceHandler>();
         spriteRenderer = item.GetComponent<SpriteRenderer>();
         value = 20f;
     }
@@ -36,5 +33,15 @@ public class ItemController : MonoBehaviour
     {
 
         return item.name;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+            Destroy(gameObject);
+        }
     }
 }

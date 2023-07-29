@@ -12,6 +12,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] SpriteRenderer powerUpSprite;
     [SerializeField] GameObject mainHandler;
     private ItemDeserializer itemDeserializer;
+    [SerializeField] GameObject self;
+    private BoxCollider2D boxCollider2D;
     private bool isActivated = false;
 
     private void Awake()
@@ -19,6 +21,7 @@ public class PowerUp : MonoBehaviour
         playerMovement = player.GetComponent<PlayerMovement>();
         playerPowerUpHandler = player.GetComponent<PlayerPowerUpHandler>();
         itemDeserializer = mainHandler.GetComponent<ItemDeserializer>();
+        boxCollider2D = self.GetComponent<BoxCollider2D>();
     }
 
     private object setterInvoke(PowerUpClass list, object getter)
@@ -79,6 +82,7 @@ public class PowerUp : MonoBehaviour
                 powerUpSprite.sprite = null;
                 gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform, false);
                 StartCoroutine(playerPowerUpHandler.setPowerUpDuration(powerUp.duration, gameObject));
+                boxCollider2D.enabled = false;
                 break;
             }
         }

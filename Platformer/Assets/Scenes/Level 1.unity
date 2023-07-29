@@ -448,7 +448,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.99951
+  orthographic size: 4.996123
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -695,6 +695,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 493507466, guid: 9134a44268b5a734d96471e6afc3fd13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 20.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 493507466, guid: 9134a44268b5a734d96471e6afc3fd13, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 493507467, guid: 9134a44268b5a734d96471e6afc3fd13, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715882489, guid: 9134a44268b5a734d96471e6afc3fd13, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 696410848677381744, guid: 9134a44268b5a734d96471e6afc3fd13, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1372,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3131707369966698430, guid: da01eddb1e30f4144b21bb194d6387ca, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 4.99951
+      value: 4.996123
       objectReference: {fileID: 0}
     - target: {fileID: 3131707369966698431, guid: da01eddb1e30f4144b21bb194d6387ca, type: 3}
       propertyPath: m_RootOrder
@@ -1582,6 +1598,22 @@ PrefabInstance:
     - target: {fileID: 5513582642722011196, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
       propertyPath: m_Name
       value: ResearchItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513582642722011197, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
+      propertyPath: m_Size.x
+      value: 0.36782712
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513582642722011197, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
+      propertyPath: m_Size.y
+      value: 0.36441082
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513582642722011197, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513582642722011197, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.005124323
       objectReference: {fileID: 0}
     - target: {fileID: 5513582642722011199, guid: 48c59b7da146d3e4eba8d691b57d51bf, type: 3}
       propertyPath: m_RootOrder

@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         if(isGroundedLeft == false || isGroundedRight == false && canDash == false)
         {
 
-            dashCooldown = 1.5f;
+            dashCooldown = 0.5f;
         }
 
         if(Input.GetKey(KeyCode.LeftShift) == true || Input.GetKey(KeyCode.JoystickButton7) == true)
@@ -165,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
+        Debug.Log("Can Dash");
         canDash = true;
     }
 

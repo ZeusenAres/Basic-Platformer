@@ -47,13 +47,7 @@ public class TestTubeTrigger : MonoBehaviour
                         {
 
                             hunger.feed(item.value);
-                        }
-
-                        if (!item.name.StartsWith("Research"))
-                        {
-
-                            Debug.Log("Insufficient resources");
-                            return;
+                            items.Remove(item);
                         }
                     }
                 }
@@ -72,15 +66,10 @@ public class TestTubeTrigger : MonoBehaviour
                         {
 
                             research.research(item.value);
-                        }
-
-                        if (!item.name.StartsWith("Research"))
-                        {
-
-                            Debug.Log("Insufficient resources");
-                            return;
+                            items.Remove(item);
                         }
                     }
+
                 }
             }
         }

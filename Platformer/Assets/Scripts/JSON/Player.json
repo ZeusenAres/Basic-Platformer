@@ -4,7 +4,7 @@
 			"speed": 10.0,
 			"jumpForce": 20.0,
 			"dashTime": 0.1,
-			"dashCooldown": 0.15,
+			"dashCooldown": 1,
 			"dashForce": 24.0
 		}
 	]
