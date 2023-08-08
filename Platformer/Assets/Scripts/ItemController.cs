@@ -7,12 +7,14 @@ public class ItemController : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject item;
+    private PlayerResourceHandler playerResourceHandler;
     private SpriteRenderer spriteRenderer;
     private float value;
 
     private void Awake()
     {
 
+        playerResourceHandler = player.GetComponent<PlayerResourceHandler>();
         spriteRenderer = item.GetComponent<SpriteRenderer>();
         value = 20f;
     }
@@ -41,6 +43,7 @@ public class ItemController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
 
+            playerResourceHandler.addToInventory(gameObject);
             Destroy(gameObject);
         }
     }

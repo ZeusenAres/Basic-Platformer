@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class TestTubeTrigger : MonoBehaviour
@@ -11,20 +13,18 @@ public class TestTubeTrigger : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI output;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject hungerBar;
-    [SerializeField] GameObject researchBar;
+    [SerializeField] Slider hungerBar;
+    [SerializeField] Slider researchBar;
     private PlayerInventory inventory;
-    private List<Item> items;
     private HungerBar hunger;
     private ResearchBar research;
-    private bool isInputpromptOn;
+    private bool isInputPromptOn;
     private string key;
 
     private void Start()
     {
         
         inventory = player.GetComponent<PlayerInventory>();
-        items = inventory.getInventory();
         hunger = hungerBar.GetComponent<HungerBar>();
         research = researchBar.GetComponent<ResearchBar>();
     }
@@ -32,22 +32,31 @@ public class TestTubeTrigger : MonoBehaviour
     private void Update()
     {
         
-        if (isInputpromptOn == true)
+        if (isInputPromptOn == true)
         {
 
             if (key == "F")
             {
+
                 if (Input.GetKeyDown(KeyCode.F) == true)
                 {
 
-                    foreach (var item in items)
+                    var items = inventory.getInventory();
+
+                    foreach (var item in items.ToList())
                     {
 
                         if (item.name.StartsWith("Food"))
                         {
 
+                            if (hungerBar.value == 100f || hungerBar.value == (100f - 5f))
+                            {
+
+                                break;
+                            }
                             hunger.feed(item.value);
                             items.Remove(item);
+                            continue;
                         }
                     }
                 }
@@ -59,14 +68,22 @@ public class TestTubeTrigger : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R) == true)
                 {
 
-                    foreach (var item in items)
+                    var items = inventory.getInventory();
+
+                    foreach (var item in items.ToList())
                     {
 
                         if (item.name.StartsWith("Research"))
                         {
 
+                            if (researchBar.value == 100f || researchBar.value == (100f - 5f))
+                            {
+
+                                break;
+                            }
                             research.research(item.value);
                             items.Remove(item);
+                            continue;
                         }
                     }
 
@@ -86,8 +103,7 @@ public class TestTubeTrigger : MonoBehaviour
 
                 output.text = "R";
                 key = output.text;
-                isInputpromptOn = true;
-                //alphaValue = (int)Enum.Parse(typeof(KeyCode), output.text);
+                isInputPromptOn = true;
             }
 
             if (gameObject.CompareTag("FoodTrigger"))
@@ -95,8 +111,7 @@ public class TestTubeTrigger : MonoBehaviour
 
                 output.text = "F";
                 key = output.text;
-                isInputpromptOn = true;
-                //alphaValue = (int)Enum.Parse(typeof(KeyCode), output.text);
+                isInputPromptOn = true;
             }
         }
     }
@@ -108,7 +123,7 @@ public class TestTubeTrigger : MonoBehaviour
         {
 
             output.text = "";
-            isInputpromptOn = false;
+            isInputPromptOn = false;
         }
     }
 }

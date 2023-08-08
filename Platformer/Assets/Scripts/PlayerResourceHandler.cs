@@ -10,7 +10,6 @@ public class PlayerResourceHandler : MonoBehaviour
     [SerializeField] Slider hungerBar;
     [SerializeField] Slider researchBar;
     private PlayerInventory inventory;
-    private bool isDestroyed;
     private Item item;
 
     private void Start()
@@ -19,27 +18,15 @@ public class PlayerResourceHandler : MonoBehaviour
         inventory = GetComponent<PlayerInventory>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void addToInventory(GameObject obj)
     {
 
-        if (isDestroyed == true)
-        {
-
-            isDestroyed = false;
-            return;
-        }
-
-        if (collision.gameObject.CompareTag("Food") || collision.gameObject.CompareTag("Research"))
-        {
-
-            this.item = new Item();
-            var item = collision.gameObject.GetComponent<ItemController>();
-            this.item.sprite = item.getSprite();
-            this.item.value = item.getValue();
-            this.item.name = item.getName();
-            inventory.addToInventory(this.item);
-            isDestroyed = true;
-        }
+        this.item = new Item();
+        var item = obj.GetComponent<ItemController>();
+        this.item.sprite = item.getSprite();
+        this.item.value = item.getValue();
+        this.item.name = item.getName();
+        inventory.addToInventory(this.item);
     }
 }
 

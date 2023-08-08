@@ -14,7 +14,8 @@ public class HungerBar : MonoBehaviour
     {
 
         hungerBar.maxValue = maxAmount;
-        currentAmount = maxAmount;
+        //currentAmount = maxAmount;
+        currentAmount = 100f;
         hungerBar.value = currentAmount;
     }
 

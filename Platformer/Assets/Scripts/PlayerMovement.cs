@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
-        Debug.Log("Can Dash");
+        //Debug.Log("Can Dash");
         canDash = true;
     }
 

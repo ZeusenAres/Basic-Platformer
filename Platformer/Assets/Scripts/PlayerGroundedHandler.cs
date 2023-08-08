@@ -16,20 +16,12 @@ public class PlayerGroundedHandler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-
-            isGrounded = true;
-        }
+        isGrounded = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-
-            isGrounded = false;
-        }
+        isGrounded = false;
     }
 }
