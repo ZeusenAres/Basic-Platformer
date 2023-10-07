@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 1110587973401573729}
   - component: {fileID: 1110587973401573728}
   - component: {fileID: 1110587973401573735}
-  - component: {fileID: 1110587973401573731}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: PlayerUi
@@ -281,22 +280,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1110587973401573731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110587973401573734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b484071542820444be6213c6b3809c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreUi: {fileID: 0}
-  silverPlackUi: {fileID: 0}
-  collectibleIcon: {fileID: 1294832261766629232, guid: 3ff99b7c0db5a4a458a5db6a0a845fe7, type: 3}
-  weightDisplay: {fileID: 237203520163323404, guid: e6cb17e6aa2a9504a86c465209371443, type: 3}
 --- !u!1 &1169842194986006068
 GameObject:
   m_ObjectHideFlags: 0
